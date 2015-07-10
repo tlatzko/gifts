@@ -1,26 +1,56 @@
-from setuptools import setup, find_packages
-import sys, os
+#!/usr/bin/env python
 
-version = '0.0'
+import setuptools
+from numpy.distutils.core import setup
+from distutils.command.build_py import build_py
+import os
+from distutils.command.build_py import build_py
 
-setup(name='gifts',
-      version=version,
-      description="Basic algorithms for imaging Fourier Transform spectroscopy",
-      long_description="""\
-""",
-      classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='spectroscopy imaging gloria',
-      author='Thomas Latzko',
-      author_email='thomas.latzko@kit.edu',
-      url='',
-      license='',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=[
-          # -*- Extra requirements: -*-
-      ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
-      )
+
+def configuration(parent_package='', top_path=None):
+    """
+    generate the configuration for the numpy build setup.
+    """
+    if os.path.exists('MANIFEST'):
+        os.remove('MANIFEST')
+    from numpy.distutils.misc_util import Configuration
+    config = Configuration(None, parent_package, top_path)
+
+    config.set_options(
+        ignore_setup_xxx_py=True,
+        assume_default_configuration=True,
+        delegate_options_to_subpackages=True,
+        quiet=True)
+
+    config.add_subpackage('gifts')
+
+    return config
+
+
+setup(
+    name='gifts',
+    version='0.1.0',
+    author=('Thomas Latzko'),
+    author_email=('thomas.latzko@kit.edu'),
+    description='general imaging fourier transform spectroscopy library',
+    long_description=open('README.md').read(),
+    url='',
+    packages=setuptools.find_packages(exclude=['docs', 'ez_setup', 'examples', 'tests']),
+    license='Apache',
+    classifiers=[
+        'Development Status :: 1 - Production/unstable',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: Apache Software License',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.4',
+        'Programming Language :: Python :: 2.5',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ],
+    configuration=configuration,
+    include_package_data=True,
+    cmdclass={'build_py': build_py},
+)

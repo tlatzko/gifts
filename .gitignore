@@ -1,0 +1,10 @@
+/bin/
+/develop-eggs/
+/parts/
+build/
+dist/
+/.installed.cfg
+gifts.egg-info/
+*.pyc
+*.so
+build/

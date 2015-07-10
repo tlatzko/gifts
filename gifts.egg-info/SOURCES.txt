@@ -1,9 +1,0 @@
-setup.cfg
-setup.py
-gifts/__init__.py
-gifts.egg-info/PKG-INFO
-gifts.egg-info/SOURCES.txt
-gifts.egg-info/dependency_links.txt
-gifts.egg-info/entry_points.txt
-gifts.egg-info/not-zip-safe
-gifts.egg-info/top_level.txt
